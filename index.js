@@ -12,7 +12,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors({
-    origin : 'http://localhost:5173',
+    origin : 'https://blog-ashen-xi.vercel.app',
     credentials : true
 }))
 let MONGODB = process.env.MONGODB;
