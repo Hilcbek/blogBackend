@@ -29,7 +29,7 @@ export let Login = expressAsync(async (req,res,next) => {
     let Password = await bcrypt.compare(req.body.password,UserStatus[0].password);
     if(!Password) return next(ErrorHandler(500, 'wrong username or password!'))
     let {password, ...UserInfo} = UserStatus[0]._doc;
-    jwt.sign({ _id  : UserInfo._id, isAdmin : UserInfo.isAdmin }, process.env.JWT_SECRET, { expiresIn : '1d'}, (err,token) => {
+    jwt.sign({ _id  : UserInfo._id, isAdmin : UserInfo.isAdmin }, process.env.JWT_SECRET, (err,token) => {
         if(err) return next(ErrorHandler(500, 'Error while generating token!'))
         res.cookie('token',token, {httpOnly : true}).status(200).json({ data : UserInfo });
     })
