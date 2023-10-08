@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import { ErrorHandler } from '../Error/error.js';
 
 export let VerifyLoggedInUser = (req,res,next) => {
-    let { token } = req.cookies;
+    let token = req.cookies.token;
     if(!token){
         return next(ErrorHandler(500, 'Login first!'))
     }
