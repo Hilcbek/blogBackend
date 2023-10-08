@@ -31,7 +31,7 @@ export let Login = expressAsync(async (req,res,next) => {
     let {password, ...UserInfo} = UserStatus[0]._doc;
     jwt.sign({ _id  : UserInfo._id, isAdmin : UserInfo.isAdmin }, process.env.JWT_SECRET, { expiresIn : '1d'}, (err,token) => {
         if(err) return next(ErrorHandler(500, 'Error while generating token!'))
-        res.status(200).json({ data : UserInfo }).cookie('token',token, { httpOnly : true,secure : true });
+        res.status(200).json({ data : UserInfo }).cookie('token',token, { httpOnly : true, secure : false });
     })
 })
 export let Logout = (req,res,next) => {
