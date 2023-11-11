@@ -11,7 +11,7 @@ import {
 } from "../Controllers/post.Controller.js";
 
 export let postRouter = express.Router();
-postRouter.post("/", VerifyLoggedInUser, AddPost);
+postRouter.post("/", AddPost);
 postRouter.get("/", FetchPost);
 postRouter.get("/:id", SinglePost);
 postRouter.put("/:id", editPost);

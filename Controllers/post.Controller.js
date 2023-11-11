@@ -4,11 +4,11 @@ import expressAsync from 'express-async-handler'
 import User from '../models/userModel.js';
 export const AddPost = expressAsync(async (req,res,next) => {
     try {
-        let { title, body, postImage} = req.body;
+        let { title, body, postImage, id} = req.body;
         if( !title || !body || !postImage ) return next(ErrorHandler(500, 'All fields are required!'))
         let newPost = await Post.create({
             ...req.body,
-            userName : req.user._id
+            userName : id
         })
         res.status(200).json({ data : newPost })
     } catch (error) {
