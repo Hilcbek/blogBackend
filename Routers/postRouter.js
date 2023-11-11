@@ -15,6 +15,6 @@ postRouter.post("/", AddPost);
 postRouter.get("/", FetchPost);
 postRouter.get("/:id", SinglePost);
 postRouter.put("/:id", editPost);
-postRouter.get("/own/posts", LoggedInUserRelatedPost);
+postRouter.get("/own/posts/:id", LoggedInUserRelatedPost);
 postRouter.delete("/:id", DeletePost);
 postRouter.get("/relatedUserPost/:name", RelatedUserPost);

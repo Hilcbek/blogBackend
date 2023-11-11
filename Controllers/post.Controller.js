@@ -34,7 +34,9 @@ export let SinglePost = expressAsync(async (req,res,next) => {
 })
 export let LoggedInUserRelatedPost = expressAsync(async (req,res,next) => {
     try {
-        let Info = await Post.find({ userName : req?.user?._id}).populate('userName');
+        let Info = await Post.find({ userName: req.params.id }).populate(
+          "userName"
+        );
         res.status(200).json({ data : Info })      
     } catch (error) {
         next(error)
@@ -44,8 +46,8 @@ export let editPost = expressAsync(async (req,res,next) => {
     try {
         let { id } = req.params;
         let EditPost = await Post.findById(id).populate('userName');
-        let isUserAdmin = await User.findById(req?.user?._id)
-        if((EditPost?.userName?._id == req?.user?._id) || (isUserAdmin?.isAdmin)){
+        let isUserAdmin = await User.findById(req.body.id)
+        if((EditPost?.userName?._id == req.body.id) || (isUserAdmin?.isAdmin)){
             let EditiedPost = await Post.findByIdAndUpdate(id,{
                 $set : {
                     ...req.body,
